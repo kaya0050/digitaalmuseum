@@ -13,9 +13,11 @@ floor.material.emissive = new THREE.Color(0x2e6e3d)
 floor.material.emissiveIntensity = 0.5
 
 //make map env
-meshy.createBox([20,10,100],[0,0,0],0x444444,[-40,0,50],true)
-meshy.createBox([20,10,100],[0,0,0],0x444444,[-20,-5,50],true)
-meshy.createBox([20,10,100],[0,0,1],0x444444,[-31.1,-6.11,50],true)
+meshy.createBox([20,10,100],[0,0,0],0x8c8b81,[-40,0,50],true)
+meshy.createBox([20,10,100],[0,0,0],0x8c8b81,[-20,-5,50],true)
+meshy.createBox([20,10,100],[0,0,0],0x8c8b81,[20,-5,50],true)
+meshy.createBox([20,10,20],[0,0,0],0x8c8b81,[0,-5,10],true)
+meshy.createBox([20,10,100],[0,0,1],0x8c8b81,[-31.1,-6.11,50],true)
 //frontrowhouses
 meshy.createBox([10,10,15],[0,0,0],0x444444,[-40,10,30],true)
 meshy.createBox([10,10,15],[0,0,0],0x444444,[-40,10,50],true)
@@ -27,6 +29,12 @@ meshy.createBox([10,10,15],[0,0,0],0x444444,[-60,10,50],true)
 meshy.createBox([10,10,15],[0,0,0],0x444444,[-60,10,70],true)
 meshy.createBox([10,10,15],[0,0,0],0x444444,[-60,10,10],true)
 
+//boats
+meshy.createBox([10,10,15],[0,0,0],0x444444,[40,-3,30],true)
+meshy.createBox([10,10,15],[0,0.5,0],0x444444,[0,-3,30],true)
+meshy.createBox([10,10,15],[0,0,0],0x444444,[40,-3,50],true)
+meshy.createBox([10,10,15],[0,0.1,0],0x444444,[40,-3,75],true)
+meshy.createBox([10,10,15],[0,-0.3,0],0x444444,[40,-3,95],true)
 meshy.loadModel([3,3,3],'./assets/models/ufo.gltf',[-40,35,32],[10,10,10],false).then((model) => {
     main.scene.add(model);
 })

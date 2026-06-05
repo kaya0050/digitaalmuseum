@@ -4,7 +4,6 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 export const textureLoader = new THREE.TextureLoader();
 export const paintings = []
 export let meshes = []
-export const doors = []
 export const models = []
 export const colliders = []
 
@@ -23,6 +22,13 @@ export const beady = new THREE.Mesh(bead, beadmaterail)
 beady.position.y = 2
 meshes.push(beady)
 //#region mesh creation funcs
+export function createLine(color,points = []){
+    const material = new THREE.LineBasicMaterial(color);
+    const geometry = new THREE.BufferGeometry().setFromPoints( points );
+    const line = new THREE.Line( geometry, material );
+    meshes.push(line)
+}
+
 export function createBox(size = [1,1,1],rotation = [0,0,0], color = 0xffffff, position = [1,1,1],hascol = true) {
     const geometry = new THREE.BoxGeometry(size[0], size[1], size[2])
     const material = new THREE.MeshStandardMaterial({ color: color })
@@ -59,12 +65,7 @@ export function createBoxTex(size = [1,1,1],texture, position = [1,1,1],hascol =
     }
     return mesh
 }
-export function createBoxTexvideo(
-    size = [1,1,1],
-    texture,
-    position = [1,1,1],
-    hascol = true
-) {
+export function createBoxTexvideo(size = [1,1,1],texture,position = [1,1,1],hascol = true) {
     const geometry = new THREE.BoxGeometry(size[0], size[1], size[2]);
 
     const video = document.createElement("video");
@@ -170,21 +171,5 @@ export function loadModel(size = [1,1,1],modelpath,position = [0,0,0],rotation =
         );
     });
 }
-export function createdoor(size = [1,1,1], color = 0xffffff, position = [1,1,1],keycode){
-    const geometry = new THREE.BoxGeometry(size[0], size[1], size[2])
-    const material = new THREE.MeshStandardMaterial({ color: color })
-    const mesh = new THREE.Mesh(geometry, material)
-    mesh.key = keycode
-    mesh.position.set(position[0], position[1], position[2])
-    meshes.push(mesh)
-    doors.push(mesh)
-    const collider = {
-        mesh: mesh,
-        box: new THREE.Box3().setFromObject(mesh)
-    };
-    colliders.push(collider);
-    return mesh
-}
-
 //#endregion
 

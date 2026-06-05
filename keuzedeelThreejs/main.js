@@ -7,10 +7,12 @@ import * as npcmaker from './scripts/npc'
 import * as audiomanager from './scripts/audiomanager.js'
 import * as player from './scripts/player'
 import * as pointclouds from './scripts/pointcloud'
+//#region vfx en postprocessing
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { FilmPass } from 'three/addons/postprocessing/FilmPass.js';
 import { BokehPass } from 'three/addons/postprocessing/BokehPass.js';
+//#endregion
 import { debug } from 'three/src/nodes/TSL.js'
 import { GroundedSkybox } from 'three/addons/objects/GroundedSkybox.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
@@ -29,9 +31,11 @@ btn.addEventListener('click', () => {
 })
 //#endregion
 
-
-meshy.createdoor([1, 5, 5], 0xffffff, [0, 0, 0], 123)
-
+const points = []
+points.push( new THREE.Vector3( -20, 0, 0 ) );
+points.push( new THREE.Vector3( 0, 10, 0 ) );
+points.push( new THREE.Vector3( 10, 0, 0 ) );
+meshy.createLine(0xffffff,points)
 //pointclouds.createpointcloud(0.1,40)
 map.Loadmap1()
 //setup skybox
@@ -129,13 +133,6 @@ renderer.setClearColor(0x777777);
 renderer.shadowMap.enabled = true;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 0.4;
-
-
-//#endregion
-
-
-
-//#region lights
 const resolution = new THREE.Vector2(
 	container.clientWidth,
 	container.clientHeight
@@ -143,21 +140,34 @@ const resolution = new THREE.Vector2(
 const composer = new EffectComposer(renderer)
 const renderPass = new RenderPass(scene, camera);
 composer.addPass(renderPass);
-const filmPass = new FilmPass();
-composer.addPass( filmPass );
 const bokehPass = new BokehPass( scene, camera, {
 	focus: 20,
 	aperture: 0.0005,
 	maxblur: 0.005
 } );
 composer.addPass( bokehPass );
+const filmPass = new FilmPass();
+composer.addPass( filmPass );
+const sun = new THREE.DirectionalLight(0xffffff, 2);
 
-
-
-
-
-
+sun.position.set(50, 100, 50);
+sun.target.position.set(0, 0, 0);
+scene.add(sun.target);
+sun.castShadow = true;
+const cam = sun.shadow.camera;
+const size = 100;
+cam.left = -size;
+cam.right = size;
+cam.top = size;
+cam.bottom = -size;
+cam.near = 1;
+cam.far = 200;
+sun.shadow.mapSize.width = 2048;
+sun.shadow.mapSize.height = 2048;
+scene.add(sun);
+//scene.add(new THREE.CameraHelper(sun.shadow.camera));
 //#endregion
+
 
 //#region rezisefixer
 window.addEventListener("resize", () => {
@@ -238,7 +248,9 @@ function racastDOF(){
     	bokehPass.uniforms.focus.value = hits[0].distance;
 	}
 }
+
 //#endregion
+
 
 //#region renderloop
 const clock = new THREE.Clock(true)
@@ -257,7 +269,6 @@ function animate() {
 	input.zoompie()
 	map.animatemap()
 	const delta = clock.getDelta()
-	doorhandling()
 	racastDOF()
 	pointclouds.animatepoints(-0.0001)
 	water.material.uniforms['time'].value += 0.2 / 60.0;
@@ -333,24 +344,6 @@ function animate() {
 animate();
 //#endregion
 
-
-//#region utils
-function doorhandling() {
-	/*if (inventoryManager.inventory[0].key === meshy.doors[0].key) {
-		console.log('keymatch', inventoryManager.inventory[0].key, meshy.doors[0].key)
-		if (input.inventory) {
-			scene.remove(meshy.doors[0])
-			inventoryManager.inventory.remove(inventoryManager.inventory[0])
-			const doorMesh = meshy.doors[0]
-
-			const index = meshy.colliders.findIndex(c => c.mesh === doorMesh)
-
-			if (index !== -1) {
-				meshy.colliders.splice(index, 1) // collider echt weg
-			}
-		}
-	}*/
-}
 
 function npchandling(npc) {
 	npc.mesh.lookAt(meshy.meshy.position)
