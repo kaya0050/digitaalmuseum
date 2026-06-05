@@ -7,18 +7,27 @@ export let clouds = null
 export function Loadmap1(){
 //Sañjīva
 //meshy.createPainting([500,500],"./assets/images/blubblub.png",[0,-1,0],[Math.PI / 2,0,0],false)
-let floor = meshy.createBoxTex([200,1,200],"./assets/images/aliem.png",[10,-1.5,0])
+let floor = meshy.createBoxTex([200,1,200],"./assets/images/aliem.png",[10,-3.5,0])
 floor.material.emissiveMap = floor.material.map
 floor.material.emissive = new THREE.Color(0x2e6e3d)
 floor.material.emissiveIntensity = 0.5
 
 //make map env
-meshy.createBox([20,10,100],[0,0,0],0x444444,[-20,0,30],true)
-meshy.createBox([20,10,100],[0,0,1],0x444444,[-11.1,-6.11,30],true)
-meshy.createBox([10,10,15],[0,0,0],0x444444,[-20,10,30],true)
-meshy.createBox([10,10,15],[0,0,0],0x444444,[-30,10,30],true)
+meshy.createBox([20,10,100],[0,0,0],0x444444,[-40,0,50],true)
+meshy.createBox([20,10,100],[0,0,0],0x444444,[-20,-5,50],true)
+meshy.createBox([20,10,100],[0,0,1],0x444444,[-31.1,-6.11,50],true)
+//frontrowhouses
+meshy.createBox([10,10,15],[0,0,0],0x444444,[-40,10,30],true)
+meshy.createBox([10,10,15],[0,0,0],0x444444,[-40,10,50],true)
+meshy.createBox([10,10,15],[0,0,0],0x444444,[-40,10,70],true)
+meshy.createBox([10,10,15],[0,0,0],0x444444,[-40,10,10],true)
+//backrow houses
+meshy.createBox([10,10,15],[0,0,0],0x444444,[-60,10,30],true)
+meshy.createBox([10,10,15],[0,0,0],0x444444,[-60,10,50],true)
+meshy.createBox([10,10,15],[0,0,0],0x444444,[-60,10,70],true)
+meshy.createBox([10,10,15],[0,0,0],0x444444,[-60,10,10],true)
 
-meshy.loadModel([3,3,3],'./assets/models/ufo.gltf',[-20,20,32],[10,10,10],false).then((model) => {
+meshy.loadModel([3,3,3],'./assets/models/ufo.gltf',[-40,35,32],[10,10,10],false).then((model) => {
     main.scene.add(model);
 })
 

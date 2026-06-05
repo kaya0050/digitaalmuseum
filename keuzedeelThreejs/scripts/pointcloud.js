@@ -4,13 +4,13 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 let geometry;
 let count = 500;
 
-export function createpointcloud(size) {
+export function createpointcloud(size,area) {
     const positions = new Float32Array(count * 3);
 
     for (let i = 0; i < count; i++) {
-        positions[i * 3 + 0] = (Math.random() - 0.5) * 10;
+        positions[i * 3 + 0] = (Math.random() - 0.5) * area;
         positions[i * 3 + 1] = (Math.random() - 0.5) * 1;
-        positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * area;
     }
 
     geometry = new THREE.BufferGeometry();

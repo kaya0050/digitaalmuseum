@@ -8,11 +8,13 @@ import * as audiomanager from './scripts/audiomanager.js'
 import * as player from './scripts/player'
 import * as pointclouds from './scripts/pointcloud'
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { FilmPass } from 'three/addons/postprocessing/FilmPass.js';
+import { BokehPass } from 'three/addons/postprocessing/BokehPass.js';
 import { debug } from 'three/src/nodes/TSL.js'
 import { GroundedSkybox } from 'three/addons/objects/GroundedSkybox.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+import { Water } from 'three/addons/objects/Water.js';
 export let scene = new THREE.Scene()
 
 //#region html references
@@ -30,7 +32,7 @@ btn.addEventListener('click', () => {
 
 meshy.createdoor([1, 5, 5], 0xffffff, [0, 0, 0], 123)
 
-
+//pointclouds.createpointcloud(0.1,40)
 map.Loadmap1()
 //setup skybox
 const envMap = await new RGBELoader().loadAsync(
@@ -44,6 +46,30 @@ const height = 15, radius = 200;
 const skybox = new GroundedSkybox(envMap, height, radius );
 skybox.position.y = 0;
 scene.add( skybox );
+
+const waterGeometry = new THREE.PlaneGeometry(1000, 1000);
+
+const water = new Water(
+    waterGeometry,
+    {
+        textureWidth: 512,
+        textureHeight: 512,
+        waterNormals: new THREE.TextureLoader().load(
+            './assets/images/water.jpg',
+            texture => {
+                texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+            }
+        ),
+        sunDirection: new THREE.Vector3(),
+        sunColor: 0xffffff,
+        waterColor: 0x006a85,
+        distortionScale: 0.2,
+    }
+);
+
+water.rotation.x = -Math.PI / 2;
+water.position.y = -1;
+scene.add(water);
 
 
 
@@ -117,11 +143,18 @@ const resolution = new THREE.Vector2(
 const composer = new EffectComposer(renderer)
 const renderPass = new RenderPass(scene, camera);
 composer.addPass(renderPass);
-//const bloomPass = new UnrealBloomPass(resolution, 0.1, 0.1, 1);
-//composer.addPass(bloomPass);
+const filmPass = new FilmPass();
+composer.addPass( filmPass );
+const bokehPass = new BokehPass( scene, camera, {
+	focus: 20,
+	aperture: 0.0005,
+	maxblur: 0.005
+} );
+composer.addPass( bokehPass );
 
-//scene.add(hemiLight);
-//scene.fog = new THREE.FogExp2(0x777777, 0.02);
+
+
+
 
 
 //#endregion
@@ -133,6 +166,7 @@ window.addEventListener("resize", () => {
 	camera.updateProjectionMatrix();
 });
 //#endregion
+
 
 //#region raycast
 const raycaster = new THREE.Raycaster();
@@ -195,6 +229,15 @@ function willCollide(newPosition) {
 	}
 	return false;
 }
+function racastDOF(){
+	raycaster.setFromCamera(new THREE.Vector2(0,0), camera);
+
+	const hits = raycaster.intersectObjects(scene.children, true);
+
+	if (hits.length > 0) {
+    	bokehPass.uniforms.focus.value = hits[0].distance;
+	}
+}
 //#endregion
 
 //#region renderloop
@@ -215,8 +258,9 @@ function animate() {
 	map.animatemap()
 	const delta = clock.getDelta()
 	doorhandling()
+	racastDOF()
 	pointclouds.animatepoints(-0.0001)
-
+	water.material.uniforms['time'].value += 0.2 / 60.0;
 
 
 	composer.setSize(container.clientWidth, container.clientHeight);
