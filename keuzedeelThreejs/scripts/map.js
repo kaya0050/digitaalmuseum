@@ -38,12 +38,15 @@ meshy.createBox([10,10,15],[0,-0.3,0],0x444444,[40,-3,95],true)
 meshy.loadModel([3,3,3],'./assets/models/ufo.gltf',[-40,35,32],[10,10,10],false).then((model) => {
     main.scene.add(model);
 })
+meshy.loadModel([3,3,3],'./assets/models/whale.glb',[30,10,135],[10,10,10],false).then((model) => {
+    main.scene.add(model);
+})
 
 //make videos
-meshy.createBoxTexvideo([3, 2, 0.1], './assets/video/vidjo.mp4', [10, 0, 0])
-meshy.createBoxTexvideo([3, 2, 0.1], './assets/video/tree.mp4', [13, 0, 0])
-meshy.createBoxTexvideo([3, 2, 0.1], './assets/video/starto.mp4', [16, 0, 0])
-meshy.createBoxTexvideo([3, 2, 0.1], './assets/video/vidjotje.mp4', [19, 0, 0])
+meshy.createBoxTexvideo([3, 2, 0.1], './assets/video/vidjo.mp4', [10, 5, 0])
+meshy.createBoxTexvideo([3, 2, 0.1], './assets/video/tree.mp4', [13, 5, 0])
+meshy.createBoxTexvideo([3, 2, 0.1], './assets/video/starto.mp4', [16, 5, 0])
+meshy.createBoxTexvideo([3, 2, 0.1], './assets/video/vidjotje.mp4', [19, 5, 0])
 // make images
 meshy.createPainting([3.5,5],"./assets/images/new2.png",[0,2,-4.5],[0,0,-0.03],true,false,"hello painting")
 meshy.createPainting([3.5,5],"./assets/images/new1.png",[5,2,-4.5],[0,0,-0.03],true,true,"hello painting2")
@@ -57,7 +60,10 @@ meshy.createPainting([5,3.5],"./assets/images/cityboy.png",[15,6,-4.5],[0,0,0])
 //meshy.loadModel([1,1,1],'./assets/models/shelf.gltf',[0,-0.5,-3],[0,Math.PI / 2,0]).then((model) => {main.scene.add(model);})
 //meshy.loadModel([0.5,0.5,0.5],'./assets/models/ufo.gltf',[2.5,0,-4],[0,0.5,0]).then((model) => {main.scene.add(model);})
 //meshy.loadModel([0.5,0.5,0.5],'./assets/models/cute.gltf',[1.3,0,-4],[0,-1,0]).then((model) => {main.scene.add(model);})
-//meshy.loadModel([0.5,0.5,0.5],'./assets/models/scooter.gltf',[0,0,-4],[0,0,0]).then((model) => {main.scene.add(model);})
+meshy.loadModel([1,1,1],'./assets/models/scooter.gltf',[-1,0,18],[0,0.2,0]).then((model) => {main.scene.add(model);})
+meshy.loadModel([1,1,1],'./assets/models/cone.glb',[-3,0,15],[0,0.2,0]).then((model) => {main.scene.add(model);})
+meshy.loadModel([1,1,1],'./assets/models/cone.glb',[3,0,15],[0,0.2,0]).then((model) => {main.scene.add(model);})
+
 
 
 }

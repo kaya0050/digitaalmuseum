@@ -46,7 +46,7 @@ const envMap = await new RGBELoader().loadAsync(
 envMap.mapping = THREE.EquirectangularReflectionMapping;
 
 scene.environment = envMap;
-const height = 15, radius = 200;
+const height = 15, radius = 500;
 const skybox = new GroundedSkybox(envMap, height, radius );
 skybox.position.y = 0;
 scene.add( skybox );
@@ -77,19 +77,21 @@ scene.add(water);
 
 
 
-const textnpc = ["welkom in de wereld van dromen", "kijk gerust wat rond", "mischien vind je iets leuks", "doei"]
+const textnpc = ["welkom in mijn wereld", "kijk gerust wat rond", "mischien vind je iets leuks", "doei"]
 const textnpcfinished = ["maak maar een ommetje"]
-meshy.loadModel([1, 1, 1], './assets/models/cute.gltf', [2, -0.5, 1], [0, -Math.PI / 2, 0], true).then((model) => {
+meshy.loadModel([0.6, 0.6, 0.6], './assets/models/fakemetaljacket.glb', [5, 0, 1], [0, 0, 0], true).then((model) => {
 	scene.add(model);
-	const cutiepatootie = new npcmaker.npc("geertruida", textnpc, textnpcfinished, false, model, 3, false, 2);
+	const papaya = new npcmaker.npc("papaya", textnpc, textnpcfinished, false, model, 3, false, 2);
 	model.add(music2)
 })
 
-
-const meshnpc2 = meshy.createBoxTexvideo([1, 1, 1], './assets/video/tree.mp4', [3, 0, 0])
-const textnpc2 = ["hoi hoi", "ik ben jackoline", "ik ben een kubus"]
-const textnpc2finished = ["ik ben een blok", "..."]
-const jackoline = new npcmaker.npc("jackoline", textnpc2, textnpc2finished, false, meshnpc2, -2)
+const textnpc2 = ["hallo bruddha", "heb je een sjekkie voor mij", "nee", "donder op dikzak"]
+const textnpcfinished2 = ["heb je nu dan een sjekkie"]
+meshy.loadModel([1, 1, 1], './assets/models/cute.gltf', [15, 0, 90], [0, 0, 0], true).then((model) => {
+	scene.add(model);
+	const cutiepatootie = new npcmaker.npc("geertruida", textnpc2, textnpcfinished2, false, model, 3, false, 2);
+	model.add(music3)
+})
 
 meshy.meshes.forEach(element => {
 	scene.add(element)
@@ -292,7 +294,7 @@ function animate() {
 	if (input.turnLeft) move.x -= 1;
 	if (input.turnRight) move.x += 1;
 	if (input.jump && isGrounded && jumptimer < 0) {
-		velocity.y += 0.15;
+		velocity.y += 0.25;
 		jumptimer = jumpresettime;
 	}
 
@@ -347,7 +349,9 @@ animate();
 
 function npchandling(npc) {
 	npc.mesh.lookAt(meshy.meshy.position)
-	npc.mesh.rotateY(-Math.PI / 2)
+	
+	npc.mesh.rotation.x = 0;
+	npc.mesh.rotation.z = 0;
 	npc.dialoguecount += 1
 	if (npc.finisheddia === false && npc.dialoguecount < npc.dialogue.length) {
 		naam.textContent = npc.name

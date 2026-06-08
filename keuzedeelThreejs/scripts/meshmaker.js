@@ -28,7 +28,6 @@ export function createLine(color,points = []){
     const line = new THREE.Line( geometry, material );
     meshes.push(line)
 }
-
 export function createBox(size = [1,1,1],rotation = [0,0,0], color = 0xffffff, position = [1,1,1],hascol = true) {
     const geometry = new THREE.BoxGeometry(size[0], size[1], size[2])
     const material = new THREE.MeshStandardMaterial({ color: color })
