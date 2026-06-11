@@ -29,6 +29,21 @@ meshy.createBox([10,10,15],[0,0,0],0x444444,[-60,10,50],true)
 meshy.createBox([10,10,15],[0,0,0],0x444444,[-60,10,70],true)
 meshy.createBox([10,10,15],[0,0,0],0x444444,[-60,10,10],true)
 
+
+for (let index = 0; index < 11; index++) {
+    meshy.loadModel([1,1,1],'./assets/models/pole.glb',[(- 10 + (index * 2)),0,19],[0,0,0],true).then((model) => {
+        main.scene.add(model);
+    })
+    
+}
+for (let index = 0; index < 40; index++) {
+    meshy.loadModel([1,1,1],'./assets/models/pole.glb',[-11,0,(20 + (index * 2))],[0,0,0],true).then((model) => {
+        main.scene.add(model);
+    })
+    
+}
+
+
 //boats
 meshy.createBox([10,10,15],[0,0,0],0x444444,[40,-3,30],true)
 meshy.createBox([10,10,15],[0,0.5,0],0x444444,[0,-3,30],true)
