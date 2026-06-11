@@ -86,19 +86,20 @@ meshy.loadModel([3,3,3],'./assets/models/whale.glb',[30,10,135],[10,10,10],false
 })
 
 //make videos
-meshy.createBoxTexvideo([3, 2, 0.1], './assets/video/vidjo.mp4', [10, 5, 0])
-meshy.createBoxTexvideo([3, 2, 0.1], './assets/video/tree.mp4', [13, 5, 0])
-meshy.createBoxTexvideo([3, 2, 0.1], './assets/video/starto.mp4', [16, 5, 0])
-meshy.createBoxTexvideo([3, 2, 0.1], './assets/video/vidjotje.mp4', [19, 5, 0])
+meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/vidjo.mp4', [10, 1, 32.5])
+meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/tree.mp4', [10, 1, 37.5])
+meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/starto.mp4', [10, 1, 42.5])
+meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/vidjotje.mp4', [10, 1, 47.5])
+
 // make images
-meshy.createPainting([3.5,5],"./assets/images/new2.png",[0,2,-4.5],[0,0,-0.03],true,false,"hello painting")
-meshy.createPainting([3.5,5],"./assets/images/new1.png",[5,2,-4.5],[0,0,-0.03],true,true,"hello painting2")
-meshy.createPainting([1,1],"./assets/images/tats.png",[11.5,7,-4.4],[0,0,0.05],true)
-meshy.createPainting([2,2],"./assets/images/ultra.png",[9.5,6,-4.4],[0,0,0.05],true)
-meshy.createPainting([2,2],"./assets/images/skull.png",[7.5,2,-4.4],[0,0,0.05],true)
-meshy.createPainting([2,2],"./assets/images/aliem.png",[9.5,3,-4.4],[0,0,0.05],true)
-meshy.createPainting([5,3.5],"./assets/images/pinboard.png",[10,6,-4.5],[0,0,-0.02])
-meshy.createPainting([5,3.5],"./assets/images/cityboy.png",[15,6,-4.5],[0,0,0])
+meshy.createPainting([3.5,5],"./assets/images/new2.png",[10, 3, 52.5],[0,Math.PI/2,-0.03],true,false,"hello painting")
+meshy.createPainting([3.5,5],"./assets/images/new1.png",[10, 3, 57.5],[0,Math.PI/2,-0.03],true,true,"hello painting2")
+meshy.createPainting([1,1],"./assets/images/tats.png",[10, 3, 62.5],[0,Math.PI/2,0.05],true)
+meshy.createPainting([2,2],"./assets/images/ultra.png",[10, 3, 67.5],[0,Math.PI/2,0.05],true)
+meshy.createPainting([2,2],"./assets/images/skull.png",[10, 3, 72.5],[0,Math.PI/2,0.03],true)
+meshy.createPainting([2,2],"./assets/images/aliem.png",[10, 3, 77.5],[0,Math.PI/2,-0.01],true)
+meshy.createPainting([5,3.5],"./assets/images/cityboy.png",[10, 3, 82.5],[0,Math.PI/2,0.02])
+
 
 //meshy.loadModel([1,1,1],'./assets/models/shelf.gltf',[0,-0.5,-3],[0,Math.PI / 2,0]).then((model) => {main.scene.add(model);})
 //meshy.loadModel([0.5,0.5,0.5],'./assets/models/ufo.gltf',[2.5,0,-4],[0,0.5,0]).then((model) => {main.scene.add(model);})

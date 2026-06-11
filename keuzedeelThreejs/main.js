@@ -48,6 +48,7 @@ envMap.mapping = THREE.EquirectangularReflectionMapping;
 scene.environment = envMap;
 const height = 15, radius = 500;
 const skybox = new GroundedSkybox(envMap, height, radius );
+scene.environmentIntensity = 0.5;
 skybox.position.y = 0;
 scene.add( skybox );
 
@@ -133,8 +134,8 @@ camera.aspect = container.clientWidth / container.clientHeight;
 camera.updateProjectionMatrix();
 renderer.setClearColor(0x777777);
 renderer.shadowMap.enabled = true;
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 0.4;
+renderer.toneMapping = THREE.AgXToneMapping;
+renderer.toneMappingExposure = 0.3;
 const resolution = new THREE.Vector2(
 	container.clientWidth,
 	container.clientHeight
