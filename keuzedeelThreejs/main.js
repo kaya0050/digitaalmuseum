@@ -34,25 +34,92 @@ btn.addEventListener('click', () => {
 })
 //#endregion
 
+//#region walls
 const points = []
-points.push( new THREE.Vector3( -20, 0, 0 ) );
-points.push( new THREE.Vector3( 0, 10, 0 ) );
-points.push( new THREE.Vector3( 10, 0, 0 ) );
+points.push( new THREE.Vector3( -30, 0, 0 ) );
+points.push( new THREE.Vector3( -30, 10, 0 ) );
+points.push( new THREE.Vector3( 30, 10, 0 ) );
+points.push( new THREE.Vector3( 30, 0, 0 ) );
 meshy.createLine(0xffffff,points)
-//pointclouds.createpointcloud(0.1,40)
+const points2 = []
+points2.push( new THREE.Vector3( 30, 10, 0 ) );
+points2.push( new THREE.Vector3( 30, 0, 100 ) );
+points2.push( new THREE.Vector3( 30, 0, 0 ) );
+points2.push( new THREE.Vector3( 30, 10, 100 ) );
+meshy.createLine(0xffffff,points2)
+const points3 = []
+points3.push( new THREE.Vector3( 30, 0, 100 ) );
+points3.push( new THREE.Vector3( 30, 10, 100 ) );
+points3.push( new THREE.Vector3( 15, 0, 100 ) );
+points3.push( new THREE.Vector3( 15, 10, 100 ) );
+meshy.createLine(0xffffff,points3)
+const points4 = []
+points4.push( new THREE.Vector3( 15, 0, 100 ) );
+points4.push( new THREE.Vector3( 15, 10, 100 ) );
+points4.push( new THREE.Vector3( 15, 0, 140 ) );
+points4.push( new THREE.Vector3( 15, 10, 140 ) );
+meshy.createLine(0xffffff,points4)
+const points5 = [
+	new THREE.Vector3( 15, 0, 140 ),
+	new THREE.Vector3( 15, 10, 140 ),
+	new THREE.Vector3( 20, 0, 140 ),
+	new THREE.Vector3( 20, 10, 140 )
+]
+meshy.createLine(0xffffff,points5)
+const points6 = [
+	new THREE.Vector3( 20, 0, 160 ),
+	new THREE.Vector3( 20, 10, 160 ),
+	new THREE.Vector3( 20, 0, 140 ),
+	new THREE.Vector3( 20, 10, 140 )
+]
+meshy.createLine(0xffffff,points6)
+const points7 = [
+	new THREE.Vector3( 20, 0, 160 ),
+	new THREE.Vector3( 20, 10, 160 ),
+	new THREE.Vector3( 0, 0, 160 ),
+	new THREE.Vector3( 0, 10, 160 )
+]
+meshy.createLine(0xffffff,points7)
+const points8 = [
+	new THREE.Vector3( 0, 0, 140 ),
+	new THREE.Vector3( 0, 10, 140 ),
+	new THREE.Vector3( 0, 0, 160 ),
+	new THREE.Vector3( 0, 10, 160 )
+]
+meshy.createLine(0xffffff,points8)
+const points9 = [
+	new THREE.Vector3( 0, 0, 140 ),
+	new THREE.Vector3( 0, 10, 140 ),
+	new THREE.Vector3( 5, 0, 140 ),
+	new THREE.Vector3( 5, 10, 140 )
+]
+meshy.createLine(0xffffff,points9)
+const points10 = [
+	new THREE.Vector3( 5, 0, 40 ),
+	new THREE.Vector3( 5, 10, 40 ),
+	new THREE.Vector3( 5, 0, 140 ),
+	new THREE.Vector3( 5, 10, 140 )
+]
+meshy.createLine(0xffffff,points10)
+
+
+//#endregion
+
 await physics.initPhysics();
+
+
 
 map.Loadmap1();
 map.createMapColliders(meshy.meshes);
 
 physics.createPlayerBody(meshy.meshy.position);
 physics.playerBody.setTranslation(
-{
-    x: 10,
-    y: 10,
-    z: 130
-},
-true
+	{
+    	x: 10,
+    	y: 10,
+    	z: 130
+	},
+	true
 );
 //setup skybox
 const envMap = await new RGBELoader().loadAsync(
@@ -92,19 +159,26 @@ water.rotation.x = -Math.PI / 2;
 water.position.y = -1;
 scene.add(water);
 
-const textnpc = ["welkom in mijn wereld", "kijk gerust wat rond", "mischien vind je iets leuks", "doei"]
-const textnpcfinished = ["maak maar een ommetje"]
-meshy.loadModel([0.6, 0.6, 0.6], './assets/models/fakemetaljacket.glb', [5, 0, 1], [0, 0, 0], true).then((model) => {
+const textnpc = ["welkom in mijn winkel", "kijk gerust wat rond", "mischien vind je iets leuks"]
+const textnpcfinished = ["luister eens naar mijn mixtape"]
+meshy.loadModel([1, 1,1], './assets/models/fakemetaljacket.glb', [-40,5,30], [0, 0, 0], true).then((model) => {
 	scene.add(model);
-	const papaya = new npcmaker.npc("papaya", textnpc, textnpcfinished, false, model, 3, false, 2);
+	const papaya = new npcmaker.npc("papaya", textnpc, textnpcfinished, false, model, 3, false, 2,npcmaker.finishtest);
 	model.add(music2)
 })
+const textnpc2 = ["goedenavond", "lekker weertje he"]
+const textnpcfinished2 = ["echt even genieten"]
 
-const textnpc2 = ["hallo bruddha", "heb je een sjekkie voor mij", "nee", "donder op dikzak"]
-const textnpcfinished2 = ["heb je nu dan een sjekkie"]
-meshy.loadModel([1, 1, 1], './assets/models/cute.gltf', [15, 0, 90], [0, 0, 0], true).then((model) => {
+meshy.loadModel([1, 1, 1], './assets/models/cute.gltf', [28, 0, 95], [0, 0, 0], true).then((model) => {
 	scene.add(model);
 	const cutiepatootie = new npcmaker.npc("geertruida", textnpc2, textnpcfinished2, false, model, 3, false, 2);
+	model.add(music3)
+})
+const textnpc3 = ["hallo brudha", "heb je een sjekkie voor mij", "nee?"]
+const textnpcfinished3 = ["wil je echte kemeel blouw sjek kopen?"]
+meshy.loadModel([1, 1, 1], './assets/models/tabakslak.glb', [10, -0.5, 150], [0, 0, 0], true).then((model) => {
+	scene.add(model);
+	const cutiepatootie = new npcmaker.npc("tabakslak", textnpc3, textnpcfinished3, false, model, 3, false, 2);
 	model.add(music3)
 })
 
@@ -126,16 +200,13 @@ camera.position.set(0, 2, 0);
 //audio
 camera.add(audiomanager.listener);
 
-const music2 = await audiomanager.loadSound('./assets/audio/beachyploinkie.mp3', true, 1,'allpass', 800,3,5)
-const music3 = await audiomanager.loadSound('./assets/audio/paradiso.mp3', true, 1,'allpass', 800,3,5)
-const music4 = await audiomanager.loadSound('./assets/audio/rainydayrainallday.mp3', true, 1,'allpass', 800,3,5)
+const music2 = await audiomanager.loadSound('./assets/audio/paradiso.mp3', true, 1,'allpass', 800,3,5)
+const music3 = await audiomanager.loadSound('./assets/audio/rainydayrainallday.mp3', true, 1,'allpass', 800,3,5)
 
 const speaker = new THREE.Object3D();
 speaker.position.set(0, 0, 0);
 const speaker2 = new THREE.Object3D();
-speaker.position.set(20, 0, 0);
-const speaker3 = new THREE.Object3D();
-speaker.position.set(20, 0, 20);
+speaker2.position.set(-40,5,30);
 
 speaker.add(music2)
 speaker2.add(music3)
@@ -159,6 +230,7 @@ const resolution = new THREE.Vector2(
 	container.clientHeight
 );
 const composer = new EffectComposer(renderer)
+
 const renderPass = new RenderPass(scene, camera);
 composer.addPass(renderPass);
 const bokehPass = new BokehPass( scene, camera, {
@@ -167,6 +239,7 @@ const bokehPass = new BokehPass( scene, camera, {
 	maxblur: 0.005
 } );
 composer.addPass( bokehPass );
+
 const filmPass = new FilmPass();
 composer.addPass( filmPass );
 const sun = new THREE.DirectionalLight(0xffffff, 2);
@@ -338,7 +411,7 @@ if (input.turnRight) move.x += 1;
 move.normalize();
 move.applyAxisAngle(new THREE.Vector3(0, 1, 0), yaw);
 
-const speed = 6;
+const speed = 20;
 
 const vel = physics.playerBody.linvel();
 
@@ -368,7 +441,6 @@ if (input.jump) {
 physics.step();
 const t = physics.playerBody.translation();
 meshy.meshy.position.set(t.x, t.y, t.z);
-
 composer.render()
 
 }
@@ -376,10 +448,6 @@ animate();
 //#endregion
 
 function npchandling(npc) {
-	npc.mesh.lookAt(meshy.meshy.position)
-	
-	npc.mesh.rotation.x = 0;
-	npc.mesh.rotation.z = 0;
 	npc.dialoguecount += 1
 	if (npc.finisheddia === false && npc.dialoguecount < npc.dialogue.length) {
 		naam.textContent = npc.name
@@ -390,12 +458,12 @@ function npchandling(npc) {
 	} else {
 		naam.textContent = ""
 		text.textContent = ""
-		if (npc.karma) {
-			player.playerState.karma += npc.karma
-			npc.karma = null
-		}
 		if (npc.teleport) {
 			loadnewmap(npc.nextmap, [0, 500, 0])
+		}
+
+		if (npc.onFinish) {
+			npc.onFinish(npc);
 		}
 
 		npc.dialoguecount = -1

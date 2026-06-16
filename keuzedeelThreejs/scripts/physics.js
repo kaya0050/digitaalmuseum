@@ -18,8 +18,6 @@ export function createTrimeshCollider(model, isStatic = true) {
         if (!child.isMesh) return;
 
         const geometry = child.geometry.clone();
-
-        // BELANGRIJK: world transform toepassen
         geometry.applyMatrix4(child.matrixWorld);
 
         const vertices = new Float32Array(

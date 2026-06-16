@@ -42,18 +42,21 @@ meshy.createBox([20,10,100],[0,0,0],0x8c8b81,[-40,0,50],true)
 meshy.createBox([20,10,100],[0,0,0],0x8c8b81,[-20,-5,50],true)
 meshy.createBox([20,10,100],[0,0,0],0x8c8b81,[20,-5,50],true)
 meshy.createBox([20,10,20],[0,0,0],0x8c8b81,[0,-5,10],true)
-meshy.createBox([20,10,100],[0,0,1],0x8c8b81,[-31.1,-6.11,50],true)
+meshy.loadModel([50,2.5,5],'./assets/models/ramp.glb',[-25  ,0,50],[0,Math.PI/2,0],true).then((model) => {
+    main.scene.add(model);
+})
 //shrine
 meshy.createBox([10,10,100],[0,0,0],0x8c8b81,[10,-5.5,90],true)
 meshy.createBox([20,10,20],[0,0,0],0x8c8b81,[10,-5.5,150],true)
+meshy.loadModel([2,2,2],'./assets/models/tori.glb',[10,-1,140],[0,Math.PI/2,0],true).then((model) => {
+    main.scene.add(model);
+})
 //make videos
 meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/vidjo.mp4', [15, 1, 150])
 meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/tree.mp4', [15, 1, 154])
 meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/starto.mp4', [15, 1, 158])
 meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/vidjotje.mp4', [15, 1, 146])
-meshy.loadModel([2,2,2],'./assets/models/tori.glb',[10,-1,140],[0,Math.PI/2,0],false).then((model) => {
-    main.scene.add(model);
-})
+
 meshy.loadModel([2,2,2],'./assets/models/mountmeruclouds.gltf',[10,-1,140],[0,0,0],false).then((model) => {
         main.scene.add(model); 
         clouds = model;
@@ -61,11 +64,14 @@ meshy.loadModel([2,2,2],'./assets/models/mountmeruclouds.gltf',[10,-1,140],[0,0,
 meshy.loadModel([1,1,1],'./assets/models/car.glb',[15,0.5,90],[0,0.2,0],true).then((model) => {
     main.scene.add(model);
 })
-meshy.loadModel([1,1,1],'./assets/models/busstop.glb',[10,-0.5,150],[0,-Math.PI/2,0],true).then((model) => {
+meshy.loadModel([1,1,1],'./assets/models/rock.glb',[10,0,155],[0,-Math.PI/2,0],true).then((model) => {
     main.scene.add(model);
 })
 //frontrowhouses
-meshy.createBox([10,10,15],[0,0,0],0x888888,[-40,10,30],true)
+
+meshy.loadModel([0.8,0.8,0.8],'./assets/models/recordstore.glb',[-40,5,30],[0,0,0],true).then((model) => {
+    main.scene.add(model);
+})
 meshy.loadModel([1,1,1],'./assets/models/airco.glb',[-40,10,38],[0,Math.PI/2,0],true).then((model) => {
     main.scene.add(model);
 })
@@ -85,17 +91,12 @@ meshy.loadModel([1,1,1],'./assets/models/airco.glb',[-40,10,18],[0,Math.PI/2,0],
     main.scene.add(model);
 })
 
-//backrow houses
-meshy.createBox([10,10,15],[0,0,0],0x444444,[-60,10,30],true)
-meshy.createBox([10,10,15],[0,0,0],0x444444,[-60,10,50],true)
-meshy.createBox([10,10,15],[0,0,0],0x444444,[-60,10,70],true)
-meshy.createBox([10,10,15],[0,0,0],0x444444,[-60,10,10],true)
 
-/*for (let index = 0; index < 5; index++) {
+for (let index = 0; index < 5; index++) {
     meshy.loadModel([1,1,2],'./assets/models/blockade.glb',[(- 20 + (index * 10)),0,1],[0,Math.PI/2,0],true).then((model) => {
         main.scene.add(model);
     })
-}*/
+}
 for (let index = 0; index < 5; index++) {
     meshy.loadModel([1,1,1],'./assets/models/pole.glb',[(- 10 + (index * 5)),0,19],[0,0,0],true).then((model) => {
         main.scene.add(model);
@@ -111,12 +112,6 @@ for (let index = 0; index < 16; index++) {
 }
 rocks()
 
-//boats
-meshy.createBox([10,10,15],[0,0,0],0x444444,[40,-3,30],true)
-//meshy.createBox([10,10,15],[0,0.5,0],0x444444,[0,-3,30],true)
-meshy.createBox([10,10,15],[0,0,0],0x444444,[40,-3,50],true)
-meshy.createBox([10,10,15],[0,0.1,0],0x444444,[40,-3,75],true)
-meshy.createBox([10,10,15],[0,-0.3,0],0x444444,[40,-3,95],true)
 meshy.loadModel([3,3,3],'./assets/models/ufo.gltf',[-40,35,32],[10,10,10],false).then((model) => {
     main.scene.add(model);
 })

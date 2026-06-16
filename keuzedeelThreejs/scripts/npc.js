@@ -1,7 +1,7 @@
 export let npcs = []
 
 export class npc {
-    constructor(name,dialogue,dialogue2,finisheddia,mesh,karma,teleport,nextmap){
+    constructor(name,dialogue,dialogue2,finisheddia,mesh,karma,teleport,nextmap,onFinish){
         this.name = name
         this.dialogue = dialogue
         this.dialogue2 = dialogue2
@@ -11,7 +11,17 @@ export class npc {
         this.karma = karma
         this.teleport = teleport
         this.nextmap = nextmap
+        this.onFinish = onFinish
+
         npcs.push(this)
+
     }
+    
+}
+export function finishtest(){
+    console.log("finishfunc")
+    open("../assets/audio/paradiso.mp3")
+}
+export function buildbridge(){
     
 }
