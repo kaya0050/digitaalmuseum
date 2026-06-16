@@ -1,11 +1,12 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-
+import * as physics from './physics.js';
 export const textureLoader = new THREE.TextureLoader();
 export const paintings = []
 export let meshes = []
 export const models = []
 export const colliders = []
+export const physicsBodies = [];
 
 //create player
 const cube = new THREE.BoxGeometry(1,1,1)
@@ -157,13 +158,8 @@ export function loadModel(size = [1,1,1],modelpath,position = [0,0,0],rotation =
                 resolve(model);
                 models.push(model)
                 if (hascol){
-                    const collider = {
-                    mesh: model,
-                    box: new THREE.Box3().setFromObject(model)
-                    };
-                    colliders.push(collider);
+                    coll = physics.createTrimeshCollider(model,true)
                 }
-                
             },
             undefined,
             (error) => reject(error)

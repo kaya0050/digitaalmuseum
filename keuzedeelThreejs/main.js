@@ -7,16 +7,19 @@ import * as npcmaker from './scripts/npc'
 import * as audiomanager from './scripts/audiomanager.js'
 import * as player from './scripts/player'
 import * as pointclouds from './scripts/pointcloud'
+import * as physics from './scripts/physics.js';
 //#region vfx en postprocessing
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { FilmPass } from 'three/addons/postprocessing/FilmPass.js';
 import { BokehPass } from 'three/addons/postprocessing/BokehPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 //#endregion
 import { debug } from 'three/src/nodes/TSL.js'
 import { GroundedSkybox } from 'three/addons/objects/GroundedSkybox.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import { Water } from 'three/addons/objects/Water.js';
+
 export let scene = new THREE.Scene()
 
 //#region html references
@@ -37,7 +40,20 @@ points.push( new THREE.Vector3( 0, 10, 0 ) );
 points.push( new THREE.Vector3( 10, 0, 0 ) );
 meshy.createLine(0xffffff,points)
 //pointclouds.createpointcloud(0.1,40)
-map.Loadmap1()
+await physics.initPhysics();
+
+map.Loadmap1();
+map.createMapColliders(meshy.meshes);
+
+physics.createPlayerBody(meshy.meshy.position);
+physics.playerBody.setTranslation(
+{
+    x: 10,
+    y: 10,
+    z: 130
+},
+true
+);
 //setup skybox
 const envMap = await new RGBELoader().loadAsync(
     './assets/envmaps/rustig_koppie_puresky_4k.hdr'
@@ -76,8 +92,6 @@ water.rotation.x = -Math.PI / 2;
 water.position.y = -1;
 scene.add(water);
 
-
-
 const textnpc = ["welkom in mijn wereld", "kijk gerust wat rond", "mischien vind je iets leuks", "doei"]
 const textnpcfinished = ["maak maar een ommetje"]
 meshy.loadModel([0.6, 0.6, 0.6], './assets/models/fakemetaljacket.glb', [5, 0, 1], [0, 0, 0], true).then((model) => {
@@ -114,16 +128,20 @@ camera.add(audiomanager.listener);
 
 const music2 = await audiomanager.loadSound('./assets/audio/beachyploinkie.mp3', true, 1,'allpass', 800,3,5)
 const music3 = await audiomanager.loadSound('./assets/audio/paradiso.mp3', true, 1,'allpass', 800,3,5)
+const music4 = await audiomanager.loadSound('./assets/audio/rainydayrainallday.mp3', true, 1,'allpass', 800,3,5)
 
 const speaker = new THREE.Object3D();
 speaker.position.set(0, 0, 0);
 const speaker2 = new THREE.Object3D();
 speaker.position.set(20, 0, 0);
+const speaker3 = new THREE.Object3D();
+speaker.position.set(20, 0, 20);
 
 speaker.add(music2)
 speaker2.add(music3)
 scene.add(speaker)
 scene.add(speaker2)
+
 
 const renderer = new THREE.WebGLRenderer({ antialias: true })
 const container = document.getElementById("game-container");
@@ -153,12 +171,14 @@ const filmPass = new FilmPass();
 composer.addPass( filmPass );
 const sun = new THREE.DirectionalLight(0xffffff, 2);
 
+
 sun.position.set(50, 100, 50);
 sun.target.position.set(0, 0, 0);
 scene.add(sun.target);
 sun.castShadow = true;
 const cam = sun.shadow.camera;
-const size = 100;
+
+const size = 130;
 cam.left = -size;
 cam.right = size;
 cam.top = size;
@@ -168,6 +188,46 @@ cam.far = 200;
 sun.shadow.mapSize.width = 2048;
 sun.shadow.mapSize.height = 2048;
 scene.add(sun);
+const hemi = new THREE.HemisphereLight(
+	0xffd9b8,
+    0xffd9b8,
+    3
+);
+const ShadowTintShader = {
+  uniforms: {
+    tDiffuse: { value: null },
+    tintColor: { value: new THREE.Color(0x0033ff) }
+  },
+  vertexShader: `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `,
+  fragmentShader: `
+    uniform sampler2D tDiffuse;
+    uniform vec3 tintColor;
+    varying vec2 vUv;
+
+    void main() {
+      vec4 color = texture2D(tDiffuse, vUv);
+
+      float luminance = dot(color.rgb, vec3(0.299, 0.587, 0.114));
+
+      // dark areas = shadows
+      float shadowFactor = smoothstep(0.3, 0.7, 1.0 - luminance);
+
+      color.rgb = mix(color.rgb, tintColor, shadowFactor * 0.3);
+
+      gl_FragColor = color;
+    }
+  `
+};
+const shadowPass = new ShaderPass(ShadowTintShader);
+composer.addPass(shadowPass);
+scene.add(hemi);
+
 //scene.add(new THREE.CameraHelper(sun.shadow.camera));
 //#endregion
 
@@ -227,21 +287,6 @@ document.addEventListener('mousemove', e => {
 });
 //#endregion
 
-//#region collision
-function willCollide(newPosition) {
-	const playerBox = new THREE.Box3().setFromObject(meshy.meshy);
-	const newBox = playerBox.clone();
-	newBox.translate(newPosition.clone().sub(meshy.meshy.position));
-
-	for (const col of meshy.colliders) {
-		if (col.mesh === meshy.meshy) continue;
-
-		if (newBox.intersectsBox(col.box)) {
-			return true;
-		}
-	}
-	return false;
-}
 function racastDOF(){
 	raycaster.setFromCamera(new THREE.Vector2(0,0), camera);
 
@@ -252,20 +297,16 @@ function racastDOF(){
 	}
 }
 
-//#endregion
 
 
 //#region renderloop
 const clock = new THREE.Clock(true)
-const velocity = new THREE.Vector3(0, 0, 0);
-const grav = -0.5;
-let isGrounded = false;
 const jumpresettime = 100;
 let jumptimer = 0;
 const pushbackforce = 0.0001
 let once = false
 let onceuse = false
-const movespeed = 100;
+const movespeed = 150;
 function animate() {
 	requestAnimationFrame(animate);
 	jumptimer -= 1;
@@ -275,7 +316,6 @@ function animate() {
 	racastDOF()
 	pointclouds.animatepoints(-0.0001)
 	water.material.uniforms['time'].value += 0.2 / 60.0;
-
 
 	composer.setSize(container.clientWidth, container.clientHeight);
 	if (input.use && onceuse == false) {
@@ -290,63 +330,50 @@ function animate() {
 	camera.rotation.x = pitch;
 
 	const move = new THREE.Vector3();
-	if (input.moveForward) move.z -= 1;
-	if (input.moveBackward) move.z += 1;
-	if (input.turnLeft) move.x -= 1;
-	if (input.turnRight) move.x += 1;
-	if (input.jump && isGrounded && jumptimer < 0) {
-		velocity.y += 0.25;
-		jumptimer = jumpresettime;
-	}
+if (input.moveForward) move.z -= 1;
+if (input.moveBackward) move.z += 1;
+if (input.turnLeft) move.x -= 1;
+if (input.turnRight) move.x += 1;
 
-	move.normalize();
-	move.applyAxisAngle(new THREE.Vector3(0, 1, 0), yaw);
-	move.multiplyScalar(0.1);
+move.normalize();
+move.applyAxisAngle(new THREE.Vector3(0, 1, 0), yaw);
 
-	velocity.x = move.x;
-	velocity.z = move.z;
-	velocity.y += grav * delta;
+const speed = 6;
 
-	const nextY = meshy.meshy.position.clone();
-	nextY.y += velocity.y;
+const vel = physics.playerBody.linvel();
 
-	if (!willCollide(nextY)) {
-		meshy.meshy.position.y = nextY.y;
-		isGrounded = false;
-	}
-	else {
-		if (velocity.y < 0) {
-			isGrounded = true;
-		}
-		velocity.y = 0;
-	}
+const targetVel = {
+    x: move.x * speed,
+    y: vel.y,
+    z: move.z * speed
+};
 
-	const nextX = meshy.meshy.position.clone();
-	nextX.x += velocity.x;
+physics.playerBody.setLinvel(
+{
+    x: THREE.MathUtils.lerp(vel.x, targetVel.x, 0.2),
+    y: vel.y,
+    z: THREE.MathUtils.lerp(vel.z, targetVel.z, 0.2)
+},
+true
+);
 
-	if (!willCollide(nextX)) {
-		meshy.meshy.position.x += (velocity.x * movespeed) * delta;
-	} else {
-		//pushback
-		meshy.meshy.position.x -= Math.sign(velocity.x) * pushbackforce;
-		velocity.x = 0;
-	}
-	const nextZ = meshy.meshy.position.clone();
-	nextZ.z += velocity.z;
+// jump
+if (input.jump) {
+    physics.playerBody.setLinvel(
+        { x: vel.x, y: 6, z: vel.z },
+        true
+    );
+}
+// step physics
+physics.step();
+const t = physics.playerBody.translation();
+meshy.meshy.position.set(t.x, t.y, t.z);
 
-	if (!willCollide(nextZ)) {
-		meshy.meshy.position.z += (velocity.z * movespeed) * delta;
-	} else {
-		//pushback
-		meshy.meshy.position.z -= Math.sign(velocity.z) * pushbackforce;
-		velocity.z = 0;
-	}
-	composer.render()
+composer.render()
 
 }
 animate();
 //#endregion
-
 
 function npchandling(npc) {
 	npc.mesh.lookAt(meshy.meshy.position)
