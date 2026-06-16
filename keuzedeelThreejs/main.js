@@ -36,8 +36,8 @@ btn.addEventListener('click', () => {
 
 //#region walls
 const points = []
-points.push( new THREE.Vector3( -30, 0, 0 ) );
-points.push( new THREE.Vector3( -30, 10, 0 ) );
+points.push( new THREE.Vector3( -50, 0, 0 ) );
+points.push( new THREE.Vector3( -50, 10, 0 ) );
 points.push( new THREE.Vector3( 30, 10, 0 ) );
 points.push( new THREE.Vector3( 30, 0, 0 ) );
 meshy.createLine(0xffffff,points)
@@ -101,6 +101,48 @@ const points10 = [
 	new THREE.Vector3( 5, 10, 140 )
 ]
 meshy.createLine(0xffffff,points10)
+const points11 = [
+	new THREE.Vector3( 5, 0, 40 ),
+	new THREE.Vector3( 5, 10, 40 ),
+	new THREE.Vector3( 10, 0, 40 ),
+	new THREE.Vector3( 10, 10, 40 )
+]
+meshy.createLine(0xffffff,points11)
+const points12 = [
+	new THREE.Vector3( 10, 0, 20 ),
+	new THREE.Vector3( 10, 10, 20 ),
+	new THREE.Vector3( 10, 0, 40 ),
+	new THREE.Vector3( 10, 10, 40 )
+]
+meshy.createLine(0xffffff,points12)
+const points13 = [
+	new THREE.Vector3( 10, 0, 20 ),
+	new THREE.Vector3( 10, 10, 20 ),
+	new THREE.Vector3( -10, 0, 20 ),
+	new THREE.Vector3( -10, 10, 20 )
+]
+meshy.createLine(0xffffff,points13)
+const points14 = [
+	new THREE.Vector3( -10, 0, 100 ),
+	new THREE.Vector3( -10, 10, 100 ),
+	new THREE.Vector3( -10, 0, 20 ),
+	new THREE.Vector3( -10, 10, 20 )
+]
+meshy.createLine(0xffffff,points14)
+const points15 = [
+	new THREE.Vector3( -10, 0, 100 ),
+	new THREE.Vector3( -10, 10, 100 ),
+	new THREE.Vector3( -50, 0, 100 ),
+	new THREE.Vector3( -50, 10, 100 )
+]
+meshy.createLine(0xffffff,points15)
+const points16 = [
+	new THREE.Vector3( -50, 0, 0 ),
+	new THREE.Vector3( -50, 10, 0 ),
+	new THREE.Vector3( -50, 0, 100 ),
+	new THREE.Vector3( -50, 10, 100 )
+]
+meshy.createLine(0xffffff,points16)
 
 
 //#endregion
