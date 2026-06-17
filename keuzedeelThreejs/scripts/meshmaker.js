@@ -2,22 +2,27 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as physics from './physics.js';
 
-export const loadingManager = new THREE.LoadingManager();
-export const textureLoader = new THREE.TextureLoader(loadingManager);
-const loader = new GLTFLoader(loadingManager);
-const loadingScreen = document.getElementById("loadingScreen");
-
-loadingManager.onLoad = () => {
-    console.log("Loading complete!");
-    loadingScreen.remove(); 
-};
 export const paintings = []
 export let meshes = []
 export const models = []
 export const colliders = []
 export const physicsBodies = [];
 
-//create player
+//#region loader
+export const loadingManager = new THREE.LoadingManager();
+export const textureLoader = new THREE.TextureLoader(loadingManager);
+const loader = new GLTFLoader(loadingManager);
+const loadingScreen = document.getElementsByClassName("loadingScreen")[0];
+
+loadingManager.onLoad = () => {
+    console.log("Loading complete!");
+    loadingScreen.remove(); 
+};
+//#endregion
+
+
+
+//#region create player
 const cube = new THREE.BoxGeometry(1,1,1)
 const material = new THREE.MeshStandardMaterial({ color: 0x967f66 })
 export const meshy = new THREE.Mesh(cube, material)
@@ -25,12 +30,16 @@ meshy.position.y = 3
 meshy.castShadow = true
 meshes.push(meshy)
 export const playercolider = new THREE.Box3().setFromObject(meshy);
+//#endregion    
 
-const bead = new THREE.SphereGeometry(0.2,16,8)
+const bead = new THREE.SphereGeometry(1,16,8)
 const beadmaterail = new THREE.MeshStandardMaterial({ color: 0xeb891e ,metalness: 0.9,roughness: 0 })
 export const beady = new THREE.Mesh(bead, beadmaterail)
+beady.position.x = 23
 beady.position.y = 2
+beady.position.z = 55
 meshes.push(beady)
+
 //#region mesh creation funcs
 export function createLine(color,points = []){
     const material = new THREE.LineBasicMaterial({

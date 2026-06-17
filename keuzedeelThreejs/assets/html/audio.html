@@ -19,6 +19,7 @@
 <body>
     <h1>AUDIO</h1>
 </body>
+
 <script>
 const songs = [
     "../audio/paradiso.mp3",
@@ -29,10 +30,8 @@ const songs = [
 
 songs.forEach(song => {
     const audio = document.createElement("audio");
-
     audio.src = song;
     audio.controls = true;
-
     document.body.appendChild(audio);
     document.body.appendChild(document.createElement("br"));
 });

@@ -94,9 +94,17 @@ const textnpc = ["welkom in mijn winkel", "kijk gerust wat rond", "mischien vind
 const textnpcfinished = ["luister eens naar mijn mixtape"]
 meshy.loadModel([1, 1,1], './assets/models/fakemetaljacket.glb', [-40,5,30], [0, 0, 0], true).then((model) => {
 	scene.add(model);
-	const papaya = new npcmaker.npc("papaya", textnpc, textnpcfinished, false, model, 3, false, 2,npcmaker.finishtest);
+	const papaya = new npcmaker.npc("papaya", textnpc, textnpcfinished, false, model, 3, false, 2,npcmaker.audiostore);
 	model.add(music2)
 })
+const textnpc4 = ["welkom in mijn winkel", "heb je intresse in fotos", "mischien vind je iets leuks"]
+const textnpcfinished4 = ["cheese"]
+meshy.loadModel([1, 1,1], './assets/models/fakemetaljacket.glb', [-40,5,50], [0, 0, 0], true).then((model) => {
+	scene.add(model);
+	const papaya2 = new npcmaker.npc("papaya", textnpc4, textnpcfinished4, false, model, 3, false, 2,npcmaker.photostore);
+})
+
+
 const textnpc2 = ["goedenavond", "lekker weertje he"]
 const textnpcfinished2 = ["echt even genieten"]
 
@@ -133,17 +141,6 @@ camera.add(audiomanager.listener);
 
 const music2 = await audiomanager.loadSound('./assets/audio/paradiso.mp3', true, 1,'allpass', 800,3,5)
 const music3 = await audiomanager.loadSound('./assets/audio/rainydayrainallday.mp3', true, 1,'allpass', 800,3,5)
-
-//const speaker = new THREE.Object3D();
-//speaker.position.set(0, 0, 0);
-//const speaker2 = new THREE.Object3D();
-//speaker2.position.set(-40,5,30);
-
-//speaker.add(music2)
-//peaker2.add(music3)
-//scene.add(speaker)
-//scene.add(speaker2)
-
 
 const renderer = new THREE.WebGLRenderer({ antialias: true })
 const container = document.getElementById("game-container");
@@ -231,8 +228,6 @@ const ShadowTintShader = {
 const shadowPass = new ShaderPass(ShadowTintShader);
 composer.addPass(shadowPass);
 scene.add(hemi);
-
-//scene.add(new THREE.CameraHelper(sun.shadow.camera));
 //#endregion
 
 

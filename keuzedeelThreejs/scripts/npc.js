@@ -18,9 +18,13 @@ export class npc {
     }
     
 }
-export function finishtest(){
+export function audiostore(){
     console.log("finishfunc")
     open("../assets/html/audio.html")
+}
+export function photostore(){
+    console.log("finishfunc")
+    open("../assets/html/photo.html")
 }
 export function buildbridge(){
     

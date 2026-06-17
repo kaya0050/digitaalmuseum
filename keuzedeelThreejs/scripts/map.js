@@ -87,12 +87,13 @@ meshy.loadModel([1,1,1],'./assets/models/rock.glb',[10,0,155],[0,-Math.PI/2,0],t
 meshy.loadModel([0.8,0.8,0.8],'./assets/models/recordstore.glb',[-40,5,30],[0,0,0],true).then((model) => {
     main.scene.add(model);
 })
-meshy.loadModel([1,1,1],'./assets/models/airco.glb',[-40,10,38],[0,Math.PI/2,0],true).then((model) => {
+meshy.loadModel([1,1,1],'./assets/models/airco.glb',[-40,20,39],[0,Math.PI/2,0],true).then((model) => {
     main.scene.add(model);
 })
-
-meshy.createBox([10,10,15],[0,0,0],0x888888,[-40,10,50],true)
-meshy.loadModel([1,1,1],'./assets/models/airco.glb',[-40,10,58],[0,Math.PI/2,0],true).then((model) => {
+meshy.loadModel([0.8,0.8,0.8],'./assets/models/photostore.glb',[-40,4,46],[0,0,0],true).then((model) => {
+    main.scene.add(model);
+})
+meshy.loadModel([1,1,1],'./assets/models/airco.glb',[-45,10,54],[0,Math.PI/2,0],true).then((model) => {
     main.scene.add(model);
 })
 
