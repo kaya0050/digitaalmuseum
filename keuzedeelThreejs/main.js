@@ -301,8 +301,6 @@ function racastDOF(){
 	}
 }
 
-
-
 //#region renderloop
 const clock = new THREE.Clock(true)
 const jumpresettime = 100;

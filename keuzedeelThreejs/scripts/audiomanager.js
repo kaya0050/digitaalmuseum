@@ -1,9 +1,9 @@
 import * as THREE from 'three'
 import { vec3 } from 'three/tsl';
-
+import * as meshy from './meshmaker'
 export const listener = new THREE.AudioListener();;
 //export const sound = new THREE.Audio(listener);
-export const audioLoader = new THREE.AudioLoader();
+export const audioLoader = new THREE.AudioLoader(meshy.loadingManager);
 
 
 export function loadSound(path, loop=false, volume=1,filtertype="allpass",frequencyval=0,distance=0,rolloff=0){

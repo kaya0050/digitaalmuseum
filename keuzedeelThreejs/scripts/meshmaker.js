@@ -1,7 +1,16 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as physics from './physics.js';
-export const textureLoader = new THREE.TextureLoader();
+
+export const loadingManager = new THREE.LoadingManager();
+export const textureLoader = new THREE.TextureLoader(loadingManager);
+const loader = new GLTFLoader(loadingManager);
+const loadingScreen = document.getElementById("loadingScreen");
+
+loadingManager.onLoad = () => {
+    console.log("Loading complete!");
+    loadingScreen.remove(); 
+};
 export const paintings = []
 export let meshes = []
 export const models = []
@@ -148,7 +157,6 @@ export function createPainting(size = [1,1],texture, position = [1,1,1],rotation
 }
 export function loadModel(size = [1,1,1],modelpath,position = [0,0,0],rotation = [0,0,0],hascol = true) {
     return new Promise((resolve, reject) => {
-        const loader = new GLTFLoader();
         loader.load(
             modelpath,
             (gltf) => {
