@@ -52,10 +52,25 @@ meshy.loadModel([2,2,2],'./assets/models/tori.glb',[10,-1,140],[0,Math.PI/2,0],t
     main.scene.add(model);
 })
 //make videos
-meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/vidjo.mp4', [15, 1, 150])
-meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/tree.mp4', [15, 1, 154])
-meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/starto.mp4', [15, 1, 158])
-meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/vidjotje.mp4', [15, 1, 146])
+meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/vidjo.mp4', [10, 1, 60])
+meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/tree.mp4', [10, 1, 70])
+meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/starto.mp4', [10, 1, 80])
+meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/vidjotje.mp4', [10, 1, 50])
+meshy.loadModel([1,1,1],'./assets/models/cone.glb',[20, -0.1, 50],[0,0,0],true).then((model) => {
+    main.scene.add(model);
+})
+meshy.loadModel([1,1,1],'./assets/models/cone.glb',[20,-0.1, 55],[0,0,0],true).then((model) => {
+    main.scene.add(model);
+})
+meshy.loadModel([1,1,1],'./assets/models/cone.glb',[30, -0.1, 50],[0,0.4,0],true).then((model) => {
+    main.scene.add(model);
+})
+meshy.loadModel([1,1,1],'./assets/models/cone.glb',[30, -0.1, 55],[0,0,0],true).then((model) => {
+    main.scene.add(model);
+})
+meshy.loadModel([1,1,1],'./assets/models/kaiju.glb',[20, -0.1, 55],[0,0,0],true).then((model) => {
+    main.scene.add(model);
+})
 
 meshy.loadModel([2,2,2],'./assets/models/mountmeruclouds.gltf',[10,-1,140],[0,0,0],false).then((model) => {
         main.scene.add(model); 
@@ -133,7 +148,7 @@ meshy.loadModel([1,1,1],'./assets/models/scooter.gltf',[-1,0,18],[0,0.2,0],true)
     main.scene.add(model);})
 meshy.loadModel([1,1,1],'./assets/models/cone.glb',[-3,0,15],[0,0.2,0]).then((model) => {main.scene.add(model);})
 meshy.loadModel([1,1,1],'./assets/models/cone.glb',[3,0,15],[0,0.2,0]).then((model) => {main.scene.add(model);})
-
+invisiblewallsmap1()
 }
 export function Loadmap2(){
     meshy.createPainting([500,500],"./assets/images/blubblub.png",[0,-1,0],[Math.PI / 2,0,0],false)
@@ -224,4 +239,58 @@ function rocks(){
     meshy.loadModel([3,3,2.5],'./assets/models/rock.glb',[35,1,25],[5,3,1],true).then((model) => {
         main.scene.add(model);
     })
+}
+function invisiblewallsmap1(){
+
+const points = []
+points.push( new THREE.Vector3( -50, 0, 0 ) );
+points.push( new THREE.Vector3( -50, 10, 0 ) );
+points.push( new THREE.Vector3( 30, 10, 0 ) );
+points.push( new THREE.Vector3( 30, 0, 0 ) );
+meshy.createLine(0xffffff,points)
+const points2 = []
+points2.push( new THREE.Vector3( 30, 10, 0 ) );
+points2.push( new THREE.Vector3( 30, 0, 100 ) );
+points2.push( new THREE.Vector3( 30, 0, 0 ) );
+points2.push( new THREE.Vector3( 30, 10, 100 ) );
+meshy.createLine(0xffffff,points2)
+const points3 = []
+points3.push( new THREE.Vector3( 30, 0, 100 ) );
+points3.push( new THREE.Vector3( 30, 10, 100 ) );
+points3.push( new THREE.Vector3( 15, 0, 100 ) );
+points3.push( new THREE.Vector3( 15, 10, 100 ) );
+meshy.createLine(0xffffff,points3)
+const points4 = []
+points4.push( new THREE.Vector3( 15, 0, 100 ) );
+points4.push( new THREE.Vector3( 15, 10, 100 ) );
+points4.push( new THREE.Vector3( 15, 0, 140 ) );
+points4.push( new THREE.Vector3( 15, 10, 140 ) );
+meshy.createLine(0xffffff,points4)
+const points5 = [new THREE.Vector3( 15, 0, 140 ),new THREE.Vector3( 15, 10, 140 ),new THREE.Vector3( 20, 0, 140 ),new THREE.Vector3( 20, 10, 140 )]
+meshy.createLine(0xffffff,points5)
+const points6 = [new THREE.Vector3( 20, 0, 160 ),new THREE.Vector3( 20, 10, 160 ),new THREE.Vector3( 20, 0, 140 ),new THREE.Vector3( 20, 10, 140 )]
+meshy.createLine(0xffffff,points6)
+const points7 = [new THREE.Vector3( 20, 0, 160 ),new THREE.Vector3( 20, 10, 160 ),new THREE.Vector3( 0, 0, 160 ),new THREE.Vector3( 0, 10, 160 )]
+meshy.createLine(0xffffff,points7)
+const points8 = [new THREE.Vector3( 0, 0, 140 ),new THREE.Vector3( 0, 10, 140 ),new THREE.Vector3( 0, 0, 160 ),new THREE.Vector3( 0, 10, 160 )]
+meshy.createLine(0xffffff,points8)
+const points9 = [new THREE.Vector3( 0, 0, 140 ),new THREE.Vector3( 0, 10, 140 ),new THREE.Vector3( 5, 0, 140 ),new THREE.Vector3( 5, 10, 140 )]
+meshy.createLine(0xffffff,points9)
+const points10 = [new THREE.Vector3( 5, 0, 40 ),new THREE.Vector3( 5, 10, 40 ),new THREE.Vector3( 5, 0, 140 ),new THREE.Vector3( 5, 10, 140 )]
+meshy.createLine(0xffffff,points10)
+const points11 = [new THREE.Vector3( 5, 0, 40 ),new THREE.Vector3( 5, 10, 40 ),new THREE.Vector3( 10, 0, 40 ),new THREE.Vector3( 10, 10, 40 )]
+meshy.createLine(0xffffff,points11)
+const points12 = [new THREE.Vector3( 10, 0, 20 ),new THREE.Vector3( 10, 10, 20 ),new THREE.Vector3( 10, 0, 40 ),new THREE.Vector3( 10, 10, 40 )]
+meshy.createLine(0xffffff,points12)
+const points13 = [new THREE.Vector3( 10, 0, 20 ),new THREE.Vector3( 10, 10, 20 ),new THREE.Vector3( -10, 0, 20 ),new THREE.Vector3( -10, 10, 20 )]
+meshy.createLine(0xffffff,points13)
+const points14 = [new THREE.Vector3( -10, 0, 100 ),new THREE.Vector3( -10, 10, 100 ),new THREE.Vector3( -10, 0, 20 ),new THREE.Vector3( -10, 10, 20 )]
+meshy.createLine(0xffffff,points14)
+const points15 = [new THREE.Vector3( -10, 0, 100 ),new THREE.Vector3( -10, 10, 100 ),new THREE.Vector3( -50, 0, 100 ),new THREE.Vector3( -50, 10, 100 )]
+meshy.createLine(0xffffff,points15)
+const points16 = [new THREE.Vector3( -50, 0, 0 ),new THREE.Vector3( -50, 10, 0 ),new THREE.Vector3( -50, 0, 100 ),new THREE.Vector3( -50, 10, 100 )]
+meshy.createLine(0xffffff,points16)
+
+
+
 }

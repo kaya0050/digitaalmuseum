@@ -24,7 +24,9 @@ beady.position.y = 2
 meshes.push(beady)
 //#region mesh creation funcs
 export function createLine(color,points = []){
-    const material = new THREE.LineBasicMaterial(color);
+    const material = new THREE.LineBasicMaterial({
+        visible: false
+    });
     const geometry = new THREE.BufferGeometry().setFromPoints( points );
     const line = new THREE.Line( geometry, material );
     meshes.push(line)

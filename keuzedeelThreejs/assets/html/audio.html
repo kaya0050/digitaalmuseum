@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../scripts/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>audio</title>
+</head>
+<body>
+
+</audio>
+</body>
+<script>
+const songs = [
+    "../audio/paradiso.mp3",
+    "../audio/bgmloop.mp3",
+    "../audio/rainydayrainallday.mp3",
+    "../audio/forestyploinkie.mp3"
+];
+
+songs.forEach(song => {
+    const audio = document.createElement("audio");
+
+    audio.src = song;
+    audio.controls = true;
+
+    document.body.appendChild(audio);
+    document.body.appendChild(document.createElement("br"));
+});
+</script>
+
+</html>

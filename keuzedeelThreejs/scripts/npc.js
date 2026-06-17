@@ -20,7 +20,7 @@ export class npc {
 }
 export function finishtest(){
     console.log("finishfunc")
-    open("../assets/audio/paradiso.mp3")
+    open("../assets/html/audio.html")
 }
 export function buildbridge(){
     

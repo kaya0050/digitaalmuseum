@@ -34,118 +34,7 @@ btn.addEventListener('click', () => {
 })
 //#endregion
 
-//#region walls
-const points = []
-points.push( new THREE.Vector3( -50, 0, 0 ) );
-points.push( new THREE.Vector3( -50, 10, 0 ) );
-points.push( new THREE.Vector3( 30, 10, 0 ) );
-points.push( new THREE.Vector3( 30, 0, 0 ) );
-meshy.createLine(0xffffff,points)
-const points2 = []
-points2.push( new THREE.Vector3( 30, 10, 0 ) );
-points2.push( new THREE.Vector3( 30, 0, 100 ) );
-points2.push( new THREE.Vector3( 30, 0, 0 ) );
-points2.push( new THREE.Vector3( 30, 10, 100 ) );
-meshy.createLine(0xffffff,points2)
-const points3 = []
-points3.push( new THREE.Vector3( 30, 0, 100 ) );
-points3.push( new THREE.Vector3( 30, 10, 100 ) );
-points3.push( new THREE.Vector3( 15, 0, 100 ) );
-points3.push( new THREE.Vector3( 15, 10, 100 ) );
-meshy.createLine(0xffffff,points3)
-const points4 = []
-points4.push( new THREE.Vector3( 15, 0, 100 ) );
-points4.push( new THREE.Vector3( 15, 10, 100 ) );
-points4.push( new THREE.Vector3( 15, 0, 140 ) );
-points4.push( new THREE.Vector3( 15, 10, 140 ) );
-meshy.createLine(0xffffff,points4)
-const points5 = [
-	new THREE.Vector3( 15, 0, 140 ),
-	new THREE.Vector3( 15, 10, 140 ),
-	new THREE.Vector3( 20, 0, 140 ),
-	new THREE.Vector3( 20, 10, 140 )
-]
-meshy.createLine(0xffffff,points5)
-const points6 = [
-	new THREE.Vector3( 20, 0, 160 ),
-	new THREE.Vector3( 20, 10, 160 ),
-	new THREE.Vector3( 20, 0, 140 ),
-	new THREE.Vector3( 20, 10, 140 )
-]
-meshy.createLine(0xffffff,points6)
-const points7 = [
-	new THREE.Vector3( 20, 0, 160 ),
-	new THREE.Vector3( 20, 10, 160 ),
-	new THREE.Vector3( 0, 0, 160 ),
-	new THREE.Vector3( 0, 10, 160 )
-]
-meshy.createLine(0xffffff,points7)
-const points8 = [
-	new THREE.Vector3( 0, 0, 140 ),
-	new THREE.Vector3( 0, 10, 140 ),
-	new THREE.Vector3( 0, 0, 160 ),
-	new THREE.Vector3( 0, 10, 160 )
-]
-meshy.createLine(0xffffff,points8)
-const points9 = [
-	new THREE.Vector3( 0, 0, 140 ),
-	new THREE.Vector3( 0, 10, 140 ),
-	new THREE.Vector3( 5, 0, 140 ),
-	new THREE.Vector3( 5, 10, 140 )
-]
-meshy.createLine(0xffffff,points9)
-const points10 = [
-	new THREE.Vector3( 5, 0, 40 ),
-	new THREE.Vector3( 5, 10, 40 ),
-	new THREE.Vector3( 5, 0, 140 ),
-	new THREE.Vector3( 5, 10, 140 )
-]
-meshy.createLine(0xffffff,points10)
-const points11 = [
-	new THREE.Vector3( 5, 0, 40 ),
-	new THREE.Vector3( 5, 10, 40 ),
-	new THREE.Vector3( 10, 0, 40 ),
-	new THREE.Vector3( 10, 10, 40 )
-]
-meshy.createLine(0xffffff,points11)
-const points12 = [
-	new THREE.Vector3( 10, 0, 20 ),
-	new THREE.Vector3( 10, 10, 20 ),
-	new THREE.Vector3( 10, 0, 40 ),
-	new THREE.Vector3( 10, 10, 40 )
-]
-meshy.createLine(0xffffff,points12)
-const points13 = [
-	new THREE.Vector3( 10, 0, 20 ),
-	new THREE.Vector3( 10, 10, 20 ),
-	new THREE.Vector3( -10, 0, 20 ),
-	new THREE.Vector3( -10, 10, 20 )
-]
-meshy.createLine(0xffffff,points13)
-const points14 = [
-	new THREE.Vector3( -10, 0, 100 ),
-	new THREE.Vector3( -10, 10, 100 ),
-	new THREE.Vector3( -10, 0, 20 ),
-	new THREE.Vector3( -10, 10, 20 )
-]
-meshy.createLine(0xffffff,points14)
-const points15 = [
-	new THREE.Vector3( -10, 0, 100 ),
-	new THREE.Vector3( -10, 10, 100 ),
-	new THREE.Vector3( -50, 0, 100 ),
-	new THREE.Vector3( -50, 10, 100 )
-]
-meshy.createLine(0xffffff,points15)
-const points16 = [
-	new THREE.Vector3( -50, 0, 0 ),
-	new THREE.Vector3( -50, 10, 0 ),
-	new THREE.Vector3( -50, 0, 100 ),
-	new THREE.Vector3( -50, 10, 100 )
-]
-meshy.createLine(0xffffff,points16)
 
-
-//#endregion
 
 await physics.initPhysics();
 
@@ -158,8 +47,8 @@ physics.createPlayerBody(meshy.meshy.position);
 physics.playerBody.setTranslation(
 	{
     	x: 10,
-    	y: 10,
-    	z: 130
+    	y: 3,
+    	z: 155
 	},
 	true
 );
@@ -245,15 +134,15 @@ camera.add(audiomanager.listener);
 const music2 = await audiomanager.loadSound('./assets/audio/paradiso.mp3', true, 1,'allpass', 800,3,5)
 const music3 = await audiomanager.loadSound('./assets/audio/rainydayrainallday.mp3', true, 1,'allpass', 800,3,5)
 
-const speaker = new THREE.Object3D();
-speaker.position.set(0, 0, 0);
-const speaker2 = new THREE.Object3D();
-speaker2.position.set(-40,5,30);
+//const speaker = new THREE.Object3D();
+//speaker.position.set(0, 0, 0);
+//const speaker2 = new THREE.Object3D();
+//speaker2.position.set(-40,5,30);
 
-speaker.add(music2)
-speaker2.add(music3)
-scene.add(speaker)
-scene.add(speaker2)
+//speaker.add(music2)
+//peaker2.add(music3)
+//scene.add(speaker)
+//scene.add(speaker2)
 
 
 const renderer = new THREE.WebGLRenderer({ antialias: true })
