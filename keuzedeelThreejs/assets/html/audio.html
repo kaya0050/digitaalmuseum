@@ -29,10 +29,18 @@ const songs = [
 ];
 
 songs.forEach(song => {
+    const name = song.split("/").pop().replace(".mp3", "");
+
+    const title = document.createElement("p");
+    title.textContent = name;
+
     const audio = document.createElement("audio");
     audio.src = song;
     audio.controls = true;
+
+    document.body.appendChild(title);
     document.body.appendChild(audio);
+    document.body.appendChild(document.createElement("br"));
     document.body.appendChild(document.createElement("br"));
 });
 </script>

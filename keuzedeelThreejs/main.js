@@ -94,17 +94,22 @@ const textnpc = ["welkom in mijn winkel", "kijk gerust wat rond", "mischien vind
 const textnpcfinished = ["luister eens naar mijn mixtape"]
 meshy.loadModel([1, 1,1], './assets/models/fakemetaljacket.glb', [-40,5,30], [0, 0, 0], true).then((model) => {
 	scene.add(model);
-	const papaya = new npcmaker.npc("papaya", textnpc, textnpcfinished, false, model, 3, false, 2,npcmaker.audiostore);
+	const papaya = new npcmaker.npc("papaya audio", textnpc, textnpcfinished, false, model, 3, false, 2,npcmaker.audiostore);
 	model.add(music2)
 })
 const textnpc4 = ["welkom in mijn winkel", "heb je intresse in fotos", "mischien vind je iets leuks"]
 const textnpcfinished4 = ["cheese"]
 meshy.loadModel([1, 1,1], './assets/models/fakemetaljacket.glb', [-40,5,50], [0, 0, 0], true).then((model) => {
 	scene.add(model);
-	const papaya2 = new npcmaker.npc("papaya", textnpc4, textnpcfinished4, false, model, 3, false, 2,npcmaker.photostore);
+	const papaya2 = new npcmaker.npc("papaya foto", textnpc4, textnpcfinished4, false, model, 3, false, 2,npcmaker.photostore);
 })
 
-
+const textnpc5 = ["welkom bij mijn winkel", "we zijn nog niet geopend"]
+const textnpcfinished5 = ["kom binnenkort terug als je geinterseerd bent in een game waar ik aan werk"]
+meshy.loadModel([1, 1,1], './assets/models/fakemetaljacket.glb', [-35,5,70], [0, 0, 0], true).then((model) => {
+	scene.add(model);
+	const papaya2 = new npcmaker.npc("papaya arcade", textnpc5, textnpcfinished5, false, model, 3, false, 2);
+})
 const textnpc2 = ["goedenavond", "lekker weertje he"]
 const textnpcfinished2 = ["echt even genieten"]
 
@@ -113,8 +118,8 @@ meshy.loadModel([1, 1, 1], './assets/models/cute.gltf', [28, 0, 95], [0, 0, 0], 
 	const cutiepatootie = new npcmaker.npc("geertruida", textnpc2, textnpcfinished2, false, model, 3, false, 2);
 	model.add(music3)
 })
-const textnpc3 = ["hallo brudha", "heb je een sjekkie voor mij", "nee?"]
-const textnpcfinished3 = ["wil je echte kemeel blouw sjek kopen?"]
+const textnpc3 = ["hallo brudha", "dit is allemaal in mijn droom","maar mischien vind je het leuk"]
+const textnpcfinished3 = ["kijk maar wat rond als je dat wil"]
 meshy.loadModel([1, 1, 1], './assets/models/tabakslak.glb', [10, -0.5, 150], [0, 0, 0], true).then((model) => {
 	scene.add(model);
 	const cutiepatootie = new npcmaker.npc("tabakslak", textnpc3, textnpcfinished3, false, model, 3, false, 2);

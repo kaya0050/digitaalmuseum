@@ -7,7 +7,6 @@ body{
     display: flex;
     flex-direction: column;
     height: 100vh; 
-    overflow: hidden;
 }
 
 .loadingScreen {
@@ -90,10 +89,39 @@ footer {
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     width: 90%;
+    margin: 0 auto;
 }
 
 #grid img {
     width: 100%;
     height: auto;
     object-fit: cover;
+}
+
+/*webkit css V*/
+
+::-webkit-media-controls-panel {
+    background-color:#967f66;
+}
+
+::-webkit-media-controls-play-button {
+    background-color: #6e5e4c;
+    border-radius: 50%;
+}
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: #967f66;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+   
+    background: #6e5e4c;
+}
+::-webkit-scrollbar-track,::-webkit-media-controls-current-time-display,::-webkit-media-controls-time-remaining-display {
+    color: #ffe4c4;
 }

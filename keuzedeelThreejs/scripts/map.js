@@ -54,7 +54,7 @@ meshy.loadModel([2,2,2],'./assets/models/tori.glb',[10,-1,140],[0,Math.PI/2,0],t
 //make videos
 meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/vidjo.mp4', [10, 1, 60])
 meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/tree.mp4', [10, 1, 70])
-meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/starto.mp4', [10, 1, 80])
+
 meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/vidjotje.mp4', [10, 1, 50])
 meshy.loadModel([1,1,1],'./assets/models/cone.glb',[20, -0.1, 50],[0,0,0],true).then((model) => {
     main.scene.add(model);
@@ -90,20 +90,22 @@ meshy.loadModel([0.8,0.8,0.8],'./assets/models/recordstore.glb',[-40,5,30],[0,0,
 meshy.loadModel([1,1,1],'./assets/models/airco.glb',[-40,20,39],[0,Math.PI/2,0],true).then((model) => {
     main.scene.add(model);
 })
-meshy.loadModel([0.8,0.8,0.8],'./assets/models/photostore.glb',[-40,4,46],[0,0,0],true).then((model) => {
+meshy.loadModel([0.8,0.8,0.8],'./assets/models/photostore.glb',[-40,5,46],[0,0,0],true).then((model) => {
     main.scene.add(model);
 })
 meshy.loadModel([1,1,1],'./assets/models/airco.glb',[-45,10,54],[0,Math.PI/2,0],true).then((model) => {
     main.scene.add(model);
 })
 
-meshy.createBox([10,10,15],[0,0,0],0x888888,[-40,10,70],true)
-meshy.loadModel([1,1,1],'./assets/models/airco.glb',[-40,10,78],[0,Math.PI/2,0],true).then((model) => {
+meshy.createBox([10,10,15],[0,0,0],0x888888,[-43,10,70],true)
+meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/starto.mp4', [-33,10,70])
+meshy.loadModel([1,1,1],'./assets/models/cone.glb',[-32,4.8,70],[0,0.4,0],true).then((model) => {
     main.scene.add(model);
 })
-
-meshy.createBox([10,10,15],[0,0,0],0x888888,[-40,10,10],true)
-meshy.loadModel([1,1,1],'./assets/models/airco.glb',[-40,10,18],[0,Math.PI/2,0],true).then((model) => {
+meshy.loadModel([1,1,1],'./assets/models/cone.glb',[-32,4.8,65],[0,0,0],true).then((model) => {
+    main.scene.add(model);
+})
+meshy.loadModel([1,1,1],'./assets/models/airco.glb',[-40,10,78],[0,Math.PI/2,0],true).then((model) => {
     main.scene.add(model);
 })
 
@@ -134,15 +136,6 @@ meshy.loadModel([3,3,3],'./assets/models/ufo.gltf',[-40,35,32],[10,10,10],false)
 meshy.loadModel([3,3,3],'./assets/models/whale.glb',[30,10,135],[10,10,10],true).then((model) => {
     main.scene.add(model);
 })
-
-// make images
-meshy.createPainting([3.5,5],"./assets/images/new2.png",[5, 3, 145],[0,Math.PI/2,-0.03],true,false,"hello painting")
-meshy.createPainting([3.5,5],"./assets/images/new1.png",[5, 3, 150],[0,Math.PI/2,-0.03],true,true,"hello painting2")
-meshy.createPainting([1,1],"./assets/images/tats.png",[5, 3, 153],[0,Math.PI/2,0.05],true)
-meshy.createPainting([2,2],"./assets/images/ultra.png",[5, 3, 159],[0,Math.PI/2,0.05],true)
-meshy.createPainting([2,2],"./assets/images/skull.png",[5, 3, 156],[0,0,0.03],true)
-meshy.createPainting([2,2],"./assets/images/aliem.png",[13, 3, 156],[0,0,-0.01],true)
-meshy.createPainting([5,3.5],"./assets/images/cityboy.png",[9, 3, 156],[0,0,0.02])
 
 meshy.loadModel([1,1,1],'./assets/models/scooter.gltf',[-1,0,18],[0,0.2,0],true).then((model) => {
     
@@ -183,7 +176,6 @@ export function Loadmap8(){
 }
 //#endregion
 
-
 export function loadthismap(number){
     switch (number){
         case 1:
@@ -220,26 +212,17 @@ export function animatemap(){
         clouds.rotation.y += 0.001;
     }
 }
-
+function randomIntFromInterval(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
 function rocks(){
-    meshy.loadModel([3,3,3],'./assets/models/rock.glb',[35,0,10],[10,10,10],true).then((model) => {
-        main.scene.add(model);
-    })
-    meshy.loadModel([3,2.5,3],'./assets/models/rock.glb',[34,2,5],[10,3,1],true).then((model) => {
-        main.scene.add(model);
-    })
-    meshy.loadModel([3,3,2.5],'./assets/models/rock.glb',[35,0,0],[5,3,1],true).then((model) => {
-        main.scene.add(model);
-    })
-    meshy.loadModel([3,3,3],'./assets/models/rock.glb',[36,0,15],[10,10,10],true).then((model) => {
-        main.scene.add(model);
-    })
-    meshy.loadModel([3,2.5,3],'./assets/models/rock.glb',[34,2,20],[10,3,1],true).then((model) => {
-        main.scene.add(model);
-    })
-    meshy.loadModel([3,3,2.5],'./assets/models/rock.glb',[35,1,25],[5,3,1],true).then((model) => {
-        main.scene.add(model);
-    })
+    for (let index = 0; index < 30; index++) {
+        meshy.loadModel([3,3,3],'./assets/models/rock.glb',[20,0,(10 + (index * randomIntFromInterval(3,5)))],[10,10,10],true).then((model) => {
+            main.scene.add(model);
+        })
+
+    }
+
 }
 function invisiblewallsmap1(){
 

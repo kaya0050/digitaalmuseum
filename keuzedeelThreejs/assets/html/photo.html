@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="../../scripts/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>audio</title>
+    <title>photo</title>
 </head>
 <body>
     <h1>IMAGES</h1>
@@ -17,21 +17,34 @@ const pictures = [
     "../images/aliem.png",
     "../images/flower.jpg",
     "../images/new1.png",
-    "../images/gyal.png",
+    "../images/blubblub.png",
     "../images/new2.png",
     "../images/skull.png",
     "../images/cityboy.png",
     "../images/vnlvl1.png",
     "../images/ultra.png",
+    "../images/tats.png",
+    "../images/starman.png",
+    "../images/supermovetest.png",
+    "../images/textureskull.png",
+    "../images/lvl1img.png",
+    
 ];
 
 const grid = document.getElementById("grid");
 
 pictures.forEach(pic => {
+    const link = document.createElement("a");
+    link.href = pic;
+    link.target = "_blank";
+
     const img = document.createElement("img");
     img.src = pic;
     img.style.width = "100%";
-    grid.appendChild(img);
+    img.style.cursor = "pointer";
+
+    link.appendChild(img);
+    grid.appendChild(link);
 });
 </script>
 
