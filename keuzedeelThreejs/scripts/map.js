@@ -111,7 +111,7 @@ meshy.loadModel([1,1,1],'./assets/models/airco.glb',[-40,10,78],[0,Math.PI/2,0],
 
 
 for (let index = 0; index < 5; index++) {
-    meshy.loadModel([1,1,2],'./assets/models/blockade.glb',[(- 20 + (index * 10)),0,1],[0,Math.PI/2,0],true).then((model) => {
+    meshy.loadModel([1,1,2],'./assets/models/blockade.glb',[(- 15 + (index * 10)),1,1],[0,Math.PI/2,0],true).then((model) => {
         main.scene.add(model);
     })
 }
@@ -128,7 +128,6 @@ for (let index = 0; index < 16; index++) {
         main.scene.add(model);
     })
 }
-rocks()
 
 meshy.loadModel([3,3,3],'./assets/models/ufo.gltf',[-40,35,32],[10,10,10],false).then((model) => {
     main.scene.add(model);
@@ -211,18 +210,6 @@ export function animatemap(){
     if (clouds){
         clouds.rotation.y += 0.001;
     }
-}
-function randomIntFromInterval(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-function rocks(){
-    for (let index = 0; index < 30; index++) {
-        meshy.loadModel([3,3,3],'./assets/models/rock.glb',[20,0,(10 + (index * randomIntFromInterval(3,5)))],[10,10,10],true).then((model) => {
-            main.scene.add(model);
-        })
-
-    }
-
 }
 function invisiblewallsmap1(){
 
