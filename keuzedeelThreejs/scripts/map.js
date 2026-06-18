@@ -98,7 +98,7 @@ meshy.loadModel([1,1,1],'./assets/models/airco.glb',[-45,10,54],[0,Math.PI/2,0],
 })
 
 meshy.createBox([10,10,15],[0,0,0],0x888888,[-43,10,70],true)
-meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/starto.mp4', [-33,10,70])
+meshy.createBoxTexvideo([0.2, 2, 3], './assets/video/starto.mp4', [-35,13,70])
 meshy.loadModel([1,1,1],'./assets/models/cone.glb',[-32,4.8,70],[0,0.4,0],true).then((model) => {
     main.scene.add(model);
 })

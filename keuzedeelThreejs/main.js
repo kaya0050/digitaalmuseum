@@ -144,8 +144,8 @@ camera.position.set(0, 2, 0);
 //audio
 camera.add(audiomanager.listener);
 
-const music2 = await audiomanager.loadSound('./assets/audio/paradiso.mp3', true, 1,'allpass', 800,3,5)
-const music3 = await audiomanager.loadSound('./assets/audio/rainydayrainallday.mp3', true, 1,'allpass', 800,3,5)
+const music2 = await audiomanager.loadSound('./assets/audio/liedje1.mp3', true, 1,'allpass', 800,3,5)
+const music3 = await audiomanager.loadSound('./assets/audio/liedje2.mp3', true, 1,'allpass', 800,3,5)
 
 const renderer = new THREE.WebGLRenderer({ antialias: true })
 const container = document.getElementById("game-container");
