@@ -20,7 +20,6 @@ import { GroundedSkybox } from 'three/addons/objects/GroundedSkybox.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import { Water } from 'three/addons/objects/Water.js';
 
-//make scene public
 export let scene = new THREE.Scene()
 
 //#region html references
@@ -28,15 +27,22 @@ const btn = document.getElementById('colorBtn')
 const text = document.getElementById('textbox')
 const naam = document.getElementById('name')
 const hud = document.getElementById('hud')
+//const karmalvl = document.getElementById('karma')
 
 btn.addEventListener('click', () => {
 	meshy.meshy.material.color.set(Math.random() * 0xffffff)
 })
 //#endregion
-//#region basic setup
+
+
+
 await physics.initPhysics();
+
+
+
 map.Loadmap1();
 map.createMapColliders(meshy.meshes);
+
 physics.createPlayerBody(meshy.meshy.position);
 physics.playerBody.setTranslation(
 	{
@@ -46,13 +52,13 @@ physics.playerBody.setTranslation(
 	},
 	true
 );
-//#endregion
-
-//#region setup skybox and water
+//setup skybox
 const envMap = await new RGBELoader().loadAsync(
     './assets/envmaps/rustig_koppie_puresky_4k.hdr'
 );
+
 envMap.mapping = THREE.EquirectangularReflectionMapping;
+
 scene.environment = envMap;
 const height = 15, radius = 500;
 const skybox = new GroundedSkybox(envMap, height, radius );
@@ -61,6 +67,7 @@ skybox.position.y = 0;
 scene.add( skybox );
 
 const waterGeometry = new THREE.PlaneGeometry(1000, 1000);
+
 const water = new Water(
     waterGeometry,
     {
@@ -78,12 +85,11 @@ const water = new Water(
         distortionScale: 0.2,
     }
 );
+
 water.rotation.x = -Math.PI / 2;
 water.position.y = -1;
 scene.add(water);
-//#endregion
 
-//#region npcs
 const textnpc = ["welkom in mijn winkel", "kijk gerust wat rond", "mischien vind je iets leuks"]
 const textnpcfinished = ["luister eens naar mijn mixtape"]
 meshy.loadModel([1, 1,1], './assets/models/fakemetaljacket.glb', [-40,5,30], [0, 0, 0], true).then((model) => {
@@ -119,9 +125,7 @@ meshy.loadModel([1, 1, 1], './assets/models/tabakslak.glb', [10, -0.5, 150], [0,
 	const cutiepatootie = new npcmaker.npc("tabakslak", textnpc3, textnpcfinished3, false, model, 3, false, 2);
 	model.add(music3)
 })
-//#endregion
 
-//add all meshes from meshmaker to scene
 meshy.meshes.forEach(element => {
 	scene.add(element)
 });
@@ -137,7 +141,11 @@ scene.add(cameraHolder);
 cameraHolder.add(camera);
 camera.position.set(0, 2, 0);
 
+//audio
+camera.add(audiomanager.listener);
 
+const music2 = await audiomanager.loadSound('./assets/audio/liedje1.mp3', true, 1,'allpass', 800,3,5)
+const music3 = await audiomanager.loadSound('./assets/audio/liedje2.mp3', true, 1,'allpass', 800,3,5)
 
 const renderer = new THREE.WebGLRenderer({ antialias: true })
 const container = document.getElementById("game-container");
@@ -227,11 +235,6 @@ composer.addPass(shadowPass);
 scene.add(hemi);
 //#endregion
 
-//audio
-camera.add(audiomanager.listener);
-
-const music2 = await audiomanager.loadSound('./assets/audio/liedje1.mp3', true, 1,'allpass', 800,3,5)
-const music3 = await audiomanager.loadSound('./assets/audio/liedje2.mp3', true, 1,'allpass', 800,3,5)
 
 //#region rezisefixer
 window.addEventListener("resize", () => {
@@ -300,12 +303,12 @@ function racastDOF(){
 
 //#region renderloop
 const clock = new THREE.Clock(true)
-const jumpresettime = 200;
-const movespeed = 150;
-let jumptimer = 20;
+const jumpresettime = 100;
+let jumptimer = 0;
+const pushbackforce = 0.0001
 let once = false
 let onceuse = false
-let canjump = true
+const movespeed = 150;
 function animate() {
 	requestAnimationFrame(animate);
 	jumptimer -= 1;
@@ -357,19 +360,11 @@ true
 );
 
 // jump
-if (input.jump && canjump) {
+if (input.jump) {
     physics.playerBody.setLinvel(
         { x: vel.x, y: 6, z: vel.z },
         true
     );
-	canjump = false
-}
-if (canjump == false){
-	jumptimer --
-	if (jumptimer < 0){
-		canjump = true
-		jumptimer = jumpresettime
-	}
 }
 // step physics
 physics.step();
@@ -421,3 +416,5 @@ function loadnewmap(nmbr, position) {
 		scene.add(element)
 	});
 }
+
+//#endregion
