@@ -35,7 +35,7 @@ export function createPointStatue(size) {
     loader.load('assets/models/ufo.gltf', (gltf) => {
         const mesh = gltf.scene.children.find(c => c.isMesh);
 
-        geometry = mesh.geometry
+        geometry = mesh.geometry  
         //get vertices in model
         count = geometry.attributes.position.count;
 
